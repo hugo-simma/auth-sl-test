@@ -1,7 +1,9 @@
-import { signIn, signUp } from "@/server/users";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import SignOutButton from "@/components/SignOutButton";
+import Link from "next/link";
+import SignInButton from "@/components/SignInButton";
+import SignUpButton from "@/components/SignUpButton";
 
 export default async function Home() {
   const session = await auth.api.getSession({
@@ -10,20 +12,13 @@ export default async function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <h1 className="text-4xl">Min heading</h1>
-        <button
-          onClick={() => signIn("test@gmail.com", "password123")}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Sign In
-        </button>
-        <button
-          onClick={signUp}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Sign Up
-        </button>
+        <h1 className="text-4xl">Welcome</h1>
+        <SignInButton />
+        <SignUpButton />
         <SignOutButton />
+        <Link className="border p-4 " href={"/dashboard"}>
+          Go to dashboard
+        </Link>
         <p>{!session ? "Not authenticated" : `${session.user.name}`}</p>
       </main>
     </div>
