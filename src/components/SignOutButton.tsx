@@ -16,7 +16,7 @@ export default function SignOutButton() {
             },
           },
         });
-      }} // sign out the user
+      }}
     >
       Sign Out
     </button>
